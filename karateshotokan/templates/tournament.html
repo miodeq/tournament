@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{tournament.name}}{% endblock %}
+{% block content %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{tournament.name}}</h3>
+  </div>
+  <div class="panel-body">
+    <br/>
+    {% if request.session.user == manager.user_id.id%}
+    <div class="container-fluid">
+	   <ul class="nav navbar-nav">
+	   		<li>
+                <a href="{% url 'addPlayersToTournament' tournament.id %}">Dodaj zawodników: </a>
+			</li>
+	  </ul>
+	</div>	
+    {% endif %}
+    <table class="table table-hover">
+		<tr>
+            <th>Zawodnik: </th>
+            <th>Drużyna: </th>
+		</tr>
+		<br>
+		{% for player in players %}
+		<tr>
+		    <td>
+		          <a href="{% url 'player' player.id %}"> {{ player.name }} {{ player.surname }} </a>
+		          	{% if request.session.user == manager.user_id.id%}
+		          		<a href="{% url 'deletePlayerTour' player.id tournament.id%}"> - </a>
+		          	{% endif %}
+		    </td>
+		    <td>
+		         {% for team in teams %}
+		         	{% if team.id = player.team_id %}
+		         		<a href="{% url 'team' team.id %}"> {{ team.name }} </a>
+		         	{% endif %}
+		         {% endfor %}
+		    </td>
+		</tr>
+		{% endfor %}
+		</table>
+  </div>
+</div>
+{% endblock %}
