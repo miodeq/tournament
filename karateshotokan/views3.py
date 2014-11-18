@@ -9,17 +9,9 @@ from karateshotokan.forms import *
 
 def KarateShotokanMain(request):
     template = loader.get_template('main.html')
-    #    latest_seasons = Season.objects.order_by('-id')[:10]
-    #    latest_rounds = Round.objects.order_by('-id')[:10]
-    #    latest_matchday = Matchday.objects.order_by('-id')[:10]
-    #    latest_matches = Match.objects.order_by('-id')[:10]
-    context = RequestContext(request, {
-                             #       'latest_matches': latest_matches,
-                             #       'latest_seasons': latest_seasons,
-                             #       'latest_rounds': latest_rounds,
-                             #        'latest_matchday': latest_matchday,
-                             })
+    context = RequestContext(request, {})
     return HttpResponse(template.render(context))
+
 #Creates tournament
 def KarateShotokanCreate(request):
     if 'user' in request.session:
