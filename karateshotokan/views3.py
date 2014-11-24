@@ -5,17 +5,18 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 
 from karateshotokan.forms import *
+from karatekyokushin.forms import *
 # Create your views here.
 
 def KarateShotokanMain(request):
-    template = loader.get_template('main.html')
+    template = loader.get_template('mainShotokan.html')
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
 
 #Creates tournament
 def KarateShotokanCreate(request):
     if 'user' in request.session:
-        template = loader.get_template('createtournament.html')
+        template = loader.get_template('createTournamentShotokan.html')
         
         if request.method == 'POST':
             form = CreateTournamentForm(request.POST)
@@ -30,6 +31,27 @@ def KarateShotokanCreate(request):
             return HttpResponse(template.render(context))
     else:
         return redirect('/signIn/')
+
+#Choose tournament of exists
+def KarateShotokanChoose(request):
+    if 'user' in request.session:
+        template = loader.get_template('chooseTournamentShotokan.html')
+
+        if request.method == 'POST':
+            form.ChooseTournamentForm(request.POST)
+            if form.is_valid():
+                user = User.objects.get(id=request.session['user'])
+                instance = form.save()
+                #reszta metody
+                return redirect('/user/')
+
+        else:
+            form = ChooseTournamentForm()
+            context = RequestContext(request, {'form': form,})
+            return HttpResponse(template.render(context))
+    else:
+        return redirect('/signIn')
+
 
 def tournament(request, tournament_id):
     template = loader.get_template('tournament.html')
@@ -46,7 +68,7 @@ def tournament(request, tournament_id):
     return HttpResponse(template.render(context))
 
 def player(request, player_id):
-    template = loader.get_template('player.html')
+    template = loader.get_template('playerShotokan.html')
     player = Player.objects.get(id=player_id)
     team = Team.objects.get(id=player.team_id.id)
     coach = Coach.objects.get(id=team.coach.id)

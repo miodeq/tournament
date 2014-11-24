@@ -7,6 +7,10 @@
    		<li>
 			<a href="{% url 'CreateTeam' %}">Utwórz drużynę</a>
 		</li>
+        
+        <li>
+            <a href="{% url 'KarateShotokanCreate' %}">Utwórz turniej</a>
+        </li>
                 
 		<li>
 			<a href="#">Wczytaj turniej</a>
@@ -23,7 +27,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="panel panel-primary">
-                <div class="panel-heading">Turnieje, w kórych jesteś zawodnikiem</div>
+                <div class="panel-heading">Turnieje, w kórych jesteś zawodnikiem:</div>
                 <div class="panel-body">
                     <ul>
                         {% for playerT in playersT %}
@@ -36,7 +40,7 @@
         </div>
         <div class="col-md-4">
             <div class="panel panel-primary">
-                <div class="panel-heading">Turnieje, w których jesteś trenerem</div>
+                <div class="panel-heading">Turnieje, w których jesteś trenerem:</div>
                 <div class="panel-body">
                     <ul>
                         {% for tournament in ctournaments %}
@@ -49,7 +53,7 @@
         </div>
         <div class="col-md-4">
             <div class="panel panel-primary">
-                <div class="panel-heading">Twoje turnieje</div>
+                <div class="panel-heading">Twoje turnieje:</div>
                 <div class="panel-body">
                     <ul>
                         {% for tournament in mtournaments %}
@@ -64,7 +68,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="panel panel-primary">
-                <div class="panel-heading">Twoje drużyny</div>
+                <div class="panel-heading">Twoje drużyny:</div>
                 <div class="panel-body">
                     <ul>
                         {% for team in teams %}
@@ -77,7 +81,7 @@
         </div>
         <div class="col-md-4">
             <div class="panel panel-primary">
-                <div class="panel-heading">Zaproszenie do drużyny: </div>
+                <div class="panel-heading">Zaproszenia do drużyny: </div>
                 <div class="panel-body">
                     <ul>
                     	{% if playerteam %}
@@ -90,7 +94,7 @@
         </div>
         <div class="col-md-4">
             <div class="panel panel-primary">
-                <div class="panel-heading">Zaproszenia dla Twoich zawoników do turnieju: </div>
+                <div class="panel-heading">Zaproszenia dla Twoich zawodników do turnieju: </div>
                 <div class="panel-body">
                     <ul>
                     	{% for player in AplayersT%}

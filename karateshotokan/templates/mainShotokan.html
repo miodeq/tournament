@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %} Karate shotokan {% endblock %}
+{% block header %} Karate Shotokan: {% endblock %}
+{% block content %}
+
+Wszystkie aktualnie rozgrywane turnieje karate shotokan:
+
+
+<div class="container-fluid">
+   <ul class="nav navbar-nav">
+   		<li>
+			<a href="{% url 'KarateShotokanCreate' %}">Nowy turniej</a>
+		</li>
+                
+		<li>
+			<a href="#">Wybierz turniej</a>
+		</li>
+
+		<li>
+			<a href="#">Wczytaj turniej</a>
+		</li>
+  </ul>
+       <table class="table table-hover">
+           <tr>
+               <th> Nazwa </th>
+               <th> Data rozpoczęcia </th>
+               <th> Data zakończenia </th>
+           </tr>
+           <br>
+           {% for tournament in tournaments %}
+           <tr>
+               <td>
+                   <a href="{% url 'tournament' tournament.id %}"> {{ tournament.name }} </a>
+               </td>
+               
+               <td>
+                   {{ tournament.start }}
+               </td>
+               <td>
+                   {{ tournament.end }}
+               </td>
+               
+           </tr>
+           {% endfor %}
+       </table>
+</div>
+{% endblock %}

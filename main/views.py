@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect
 from django.core.urlresolvers import reverse
+from django.core.context_processors import csrf
 
 
 from main.forms import *
@@ -19,6 +20,7 @@ def signUp(request):
         form = UserFormSignUp(request.POST)
         if form.is_valid():
             form.save()
+            print("Pomyslnie utworzono konto!")
             return HttpResponseRedirect('/')
     else:
         form = UserFormSignUp()
@@ -37,6 +39,7 @@ def signIn(request):
         request.session.set_expiry(3600) # ustawienie czasu trwania sesji na 1h
         request.session['user'] = us.id
         request.session['login'] = us.login
+        print("Pomyslnie zalogowales sie na konto!")
         return redirect('/user/')
     else:
         form = UserFormSignIn()
